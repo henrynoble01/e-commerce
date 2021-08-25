@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Paper,
   Stepper,
@@ -22,7 +23,48 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
   const [shippingData, setShippingData] = useState({});
   const classes = useStyles();
 
-  const Confirmation = () => <div>Confirmation</div>;
+  //   let Confirmation = () =>
+  //     order.customer ? (
+  //       <>
+  //         <Typography variant='h5'>
+  //           Thank you for your purchase, {order.customer.firstname}
+  //           {order.customer.lastname}
+  //         </Typography>
+  //         <Divider className={classes.divider} />
+  //         <Typography variant='subtitle2'>
+  //           Order ref: {order.customer_reference}
+  //         </Typography>
+  //         <br />
+  //         <Button component={Link} to='/' variant='outlined' type='button'>
+  //           Back to Home
+  //         </Button>
+  //       </>
+  //     ) : (
+  //       <div className={classes.spinner}>
+  //         <CircularProgress />
+  //       </div>
+  //     );
+  let Confirmation = () => (
+    <>
+      <Typography variant='h5'>Thank you for your purchase,</Typography>
+      <Divider className={classes.divider} />
+      <Typography variant='subtitle2'>Order ref: ref</Typography>
+      <br />
+      <Button component={Link} to='/' variant='outlined' type='button'>
+        Back to Home
+      </Button>
+    </>
+  );
+
+  if (error) {
+    <>
+      <Typography variant='h5'>Error: {error}</Typography>
+      <br />
+      <Button component={Link} to='/' variant='outlined' type='button'>
+        Back to Home
+      </Button>
+    </>;
+  }
 
   useEffect(() => {
     const generateToken = async () => {
