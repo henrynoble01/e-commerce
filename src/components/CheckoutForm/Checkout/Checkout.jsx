@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   Paper,
   Stepper,
@@ -21,6 +21,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
+  const history = useHistory();
   const classes = useStyles();
 
   //   let Confirmation = () =>
@@ -74,7 +75,10 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         });
         // console.log(token);
         setCheckoutToken(token);
-      } catch (error) {}
+      } catch (error) {
+        // eslint-disable-next-line no-restricted-globals
+        history.pushState("/");
+      }
     };
 
     generateToken();
